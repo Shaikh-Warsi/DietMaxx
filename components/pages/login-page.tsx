@@ -29,16 +29,39 @@ export default function LoginPage({ onLoginSuccess }: { onLoginSuccess: () => vo
     },
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log('Login form submitted with data:', data);
-    // Simulate API call
-    setTimeout(() => {
-      onLoginSuccess();
-      toast({
-        title: "Login Successful!",
-        description: "You have been successfully logged in.",
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: data.email, password: data.password }),
       });
-    }, 1000);
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        onLoginSuccess();
+        toast({
+          title: "Login Successful!",
+          description: "You have been successfully logged in.",
+        });
+      } else {
+        toast({
+          title: "Login Failed!",
+          description: result.message || "Invalid email or password.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast({
+        title: "Login Error!",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const { toast } = useToast();

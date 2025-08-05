@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { FormData, RecommendationsData } from '@/types/form';
 import { NextResponse } from 'next/server';

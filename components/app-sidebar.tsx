@@ -15,45 +15,44 @@ const menuItems = [
     {
       title: "Home",
       id: "home",
-      icon: Home,
+      icon: HomeIcon,
     },
     {
       title: "Vitamin Optimization",
       id: "vitamin",
-      icon: Pill,
+      icon: PillIcon,
     },
     {
       title: "Neurochemical Optimization",
       id: "neurochemical",
-      icon: Brain,
+      icon: BrainIcon,
     },
     {
       title: "Gut Health",
       id: "gut-health",
-      icon: Heart,
+      icon: HeartIcon,
     },
     {
       title: "Sleep & Recovery",
       id: "sleep-recovery",
-      icon: Moon,
+      icon: MoonIcon,
     },
     {
       title: "Settings",
       id: "settings",
-      icon: Settings,
+      icon: SettingsIcon,
     },
     {
       title: "Login",
       id: "login",
-      icon: LogIn,
+      icon: LogInIcon,
     },
   ]
 
 import { PageType } from "../app/ClientLayout";
+import { Home as HomeIcon, Pill as PillIcon, Brain as BrainIcon, Heart as HeartIcon, Moon as MoonIcon, Settings as SettingsIcon, LogIn as LogInIcon, LogOut as LogOutIcon } from "lucide-react";
 
-
-
-export function AppSidebar({ setCurrentPage }: { setCurrentPage: (page: PageType) => void }) {
+export function AppSidebar({ setCurrentPage, onLogout }: { setCurrentPage: (page: PageType) => void; onLogout: () => void }) {
 
 
   const handleNavigation = (pageId: PageType) => {
@@ -78,7 +77,7 @@ export function AppSidebar({ setCurrentPage }: { setCurrentPage: (page: PageType
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton
-                    onClick={() => handleNavigation(item.id)}
+                    onClick={() => handleNavigation(item.id as PageType)}
                     className="flex items-center gap-3 hover:bg-blue-50 transition-colors cursor-pointer"
                   >
                     <item.icon className="h-4 w-4" />
@@ -93,7 +92,15 @@ export function AppSidebar({ setCurrentPage }: { setCurrentPage: (page: PageType
           <SidebarGroupLabel className="text-gray-600 text-xs uppercase tracking-wide">Account</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  onClick={onLogout}
+                  className="flex items-center gap-3 hover:bg-blue-50 transition-colors cursor-pointer"
+                >
+                  <LogOutIcon className="h-4 w-4" />
+                  <span>Logout</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -22,9 +22,25 @@ export type PageType = "home" | "vitamin" | "neurochemical" | "gut-health" | "sl
 
 export default function ClientLayout() {
   const [currentPage, setCurrentPage] = useState<PageType>("home");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Temporary state for login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    localStorage.setItem('isLoggedIn', 'true'); // Store login status in localStorage
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('isLoggedIn'); // Clear login status from localStorage
+  };
 
   useEffect(() => {
+    // Check login status from localStorage on component mount
+    const storedLoginStatus = localStorage.getItem('isLoggedIn');
+    if (storedLoginStatus === 'true') {
+      setIsLoggedIn(true);
+    }
+
     const handleNavigation = (event: CustomEvent) => {
       setCurrentPage(event.detail)
     }
@@ -55,15 +71,14 @@ export default function ClientLayout() {
     <SidebarProvider>
       {isLoggedIn ? (
         <div className="flex min-h-screen">
-          <AppSidebar setCurrentPage={setCurrentPage} />
+          <AppSidebar setCurrentPage={setCurrentPage} onLogout={handleLogout} />
           <div className="flex-1">
             {/* Page Content */}
             <main className="container mx-auto px-4 py-6">{renderPage()}</main>
-          
           </div>
         </div>
       ) : (
-        <LoginPage onLoginSuccess={() => setIsLoggedIn(true)} />
+        <LoginPage onLoginSuccess={handleLoginSuccess} />
       )}
     </SidebarProvider>
   )
