@@ -15,11 +15,15 @@ interface ChatRequestBody {
 
 export async function POST(req: Request) {
   try {
-    const { history, message, formData } = await req.json() as ChatRequestBody;
+    const body = await req.json() as ChatRequestBody;
+    const { history, message, formData = {} } = body;
 
     // Validate required inputs
     if (!message) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
+    }
+    if (!formData) {
+      return NextResponse.json({ error: 'Form data is required' }, { status: 400 });
     }
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -33,13 +37,14 @@ export async function POST(req: Request) {
 
     // Create a structured prompt with user information
     const initialPrompt = `Based on the following user information and habits:\n
-${Object.entries(formData)
+${Object.entries(formData || {})
   .filter(([_, value]) => value) // Only include non-empty values
   .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`)
   .join('\n')}
 
 Answer the following question: ${message}`;
 
+    console.log('Initial prompt size:', initialPrompt.length); // Log the size of the prompt
     const result = await chat.sendMessage(initialPrompt);
     const response = await result.response;
     const text = response.text();

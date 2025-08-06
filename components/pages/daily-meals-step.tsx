@@ -8,7 +8,7 @@ interface DailyMealsStepProps {
     lunch: string;
     dinner: string;
   };
-  handleInputChange: (field: string, value: string) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string, name: keyof FormData) => void;
 }
 
 export function DailyMealsStep({ formData, handleInputChange }: DailyMealsStepProps) {
@@ -26,7 +26,7 @@ export function DailyMealsStep({ formData, handleInputChange }: DailyMealsStepPr
           <Textarea
             id="breakfast"
             value={formData.breakfast}
-            onChange={(e) => handleInputChange("breakfast", e.target.value)}
+            onChange={(e) => handleInputChange(e, "breakfast")}
             className="min-h-[80px] border-gray-200 focus:border-blue-400 focus:ring-blue-400"
             placeholder="Describe your typical breakfast..."
           />
@@ -38,7 +38,7 @@ export function DailyMealsStep({ formData, handleInputChange }: DailyMealsStepPr
           <Textarea
             id="lunch"
             value={formData.lunch}
-            onChange={(e) => handleInputChange("lunch", e.target.value)}
+            onChange={(e) => handleInputChange(e, "lunch")}
             className="min-h-[80px] border-gray-200 focus:border-blue-400 focus:ring-blue-400"
             placeholder="Describe your typical lunch..."
           />
@@ -50,7 +50,7 @@ export function DailyMealsStep({ formData, handleInputChange }: DailyMealsStepPr
           <Textarea
             id="dinner"
             value={formData.dinner}
-            onChange={(e) => handleInputChange("dinner", e.target.value)}
+            onChange={(e) => handleInputChange(e, "dinner")}
             className="min-h-[80px] border-gray-200 focus:border-blue-400 focus:ring-blue-400"
             placeholder="Describe your typical dinner..."
           />

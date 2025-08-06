@@ -1,8 +1,14 @@
 "use client"
 
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleGetStartedClick = () => {
+    router.push('/home'); // Assuming '/home' is the route for the assessment form
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header with Menu Button */}
@@ -26,7 +32,10 @@ export default function Home() {
         <p className="text-xl text-gray-700 mb-8 max-w-2xl animate-fade-in-up animation-delay-200">
           DietMaxxing uses cutting-edge AI to provide personalized dietary analysis and optimization, helping you achieve your health and fitness goals.
         </p>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 animate-fade-in-up animation-delay-400">
+        <button
+          onClick={handleGetStartedClick}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 animate-fade-in-up animation-delay-400"
+        >
           Get Started Today
         </button>
       </main>

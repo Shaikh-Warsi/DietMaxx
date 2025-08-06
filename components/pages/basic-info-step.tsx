@@ -8,7 +8,7 @@ import { AlertCircle } from 'lucide-react';
 
 interface BasicInfoStepProps {
   formData: FormData;
-  handleInputChange: (field: keyof FormData, value: string | number) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string, name: keyof FormData) => void;
   errors?: Record<string, string>;
 }
 
@@ -27,7 +27,7 @@ export function BasicInfoStep({ formData, handleInputChange, errors = {} }: Basi
           <Input
             id="name"
             value={formData.name || ''}
-            onChange={(e) => handleInputChange("name", e.target.value)}
+            onChange={(e) => handleInputChange(e, "name")}
             className={`h-12 border-gray-200 focus:border-blue-400 focus:ring-blue-400 ${errors.name ? 'border-red-500' : ''}`}
             placeholder="Enter your name"
           />
@@ -46,7 +46,7 @@ export function BasicInfoStep({ formData, handleInputChange, errors = {} }: Basi
             id="age"
             type="number"
             value={formData.age || ''}
-            onChange={(e) => handleInputChange("age", parseInt(e.target.value) || '')}
+            onChange={(e) => handleInputChange(e, "age")}
             className={`h-12 border-gray-200 focus:border-blue-400 focus:ring-blue-400 ${errors.age ? 'border-red-500' : ''}`}
             placeholder="Enter your age"
           />
@@ -61,7 +61,7 @@ export function BasicInfoStep({ formData, handleInputChange, errors = {} }: Basi
           <Label className="text-gray-700">Gender</Label>
           <RadioGroup
             value={formData.gender || ''}
-            onValueChange={(value) => handleInputChange("gender", value)}
+            onValueChange={(value) => handleInputChange(value, "gender")}
             className="flex gap-6"
           >
           {errors.gender && (
@@ -92,7 +92,7 @@ export function BasicInfoStep({ formData, handleInputChange, errors = {} }: Basi
             id="weight"
             type="number"
             value={formData.weight || ''}
-            onChange={(e) => handleInputChange("weight", parseInt(e.target.value) || '')}
+            onChange={(e) => handleInputChange(e, "weight")}
             className={`h-12 border-gray-200 focus:border-blue-400 focus:ring-blue-400 ${errors.weight ? 'border-red-500' : ''}`}
             placeholder="Enter weight in kg"
           />

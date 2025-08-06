@@ -10,7 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import './globals.css'
 const inter = Inter({ subsets: ["latin"] })
 
-export default function RootLayout() {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -22,7 +22,7 @@ export default function RootLayout() {
           forcedTheme="light"
           disableTransitionOnChange
         >
-          <ClientLayout />
+          <ClientLayout>{children}</ClientLayout>
           <Toaster />
           <Analytics />
         </ThemeProvider>

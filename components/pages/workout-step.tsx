@@ -7,7 +7,7 @@ import { AlertCircle } from "lucide-react";
 
 interface WorkoutStepProps {
   formData: FormData;
-  handleInputChange: (field: keyof FormData, value: string | number) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string, name: keyof FormData) => void;
   errors?: Record<string, string>;
 }
 
@@ -23,7 +23,7 @@ export function WorkoutStep({ formData, handleInputChange, errors = {} }: Workou
           <Label className="text-gray-700">Do you workout?</Label>
           <RadioGroup
             value={formData.workout || ''}
-            onValueChange={(value) => handleInputChange("workout", value)}
+            onValueChange={(value) => handleInputChange(value, "workout")}
             className="flex gap-6"
           >
           {errors.workout && (

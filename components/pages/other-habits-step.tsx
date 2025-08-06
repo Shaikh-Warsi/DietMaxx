@@ -7,7 +7,7 @@ import { AlertCircle } from "lucide-react"
 
 interface OtherHabitsStepProps {
   formData: FormData;
-  handleInputChange: (field: keyof FormData, value: string | number) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string, name: keyof FormData) => void;
   errors?: Record<string, string>;
 }
 
@@ -23,7 +23,7 @@ export function OtherHabitsStep({ formData, handleInputChange, errors = {} }: Ot
           <Label className="text-gray-700">Do you take any supplements?</Label>
           <RadioGroup
             value={formData.supplements || ''}
-            onValueChange={(value) => handleInputChange("supplements", value)}
+            onValueChange={(value) => handleInputChange(value, "supplements")}
             className="flex gap-6"
           >
           {errors.supplements && (
@@ -46,7 +46,7 @@ export function OtherHabitsStep({ formData, handleInputChange, errors = {} }: Ot
               <Textarea
                 id="supplements_detail"
                 value={formData.supplements_detail || ''}
-                onChange={(e) => handleInputChange("supplements_detail", e.target.value)}
+                onChange={(e) => handleInputChange(e, "supplements_detail")}
                 className={`min-h-[60px] border-gray-200 focus:border-blue-400 focus:ring-blue-400 ${errors.supplements_detail ? 'border-red-500' : ''}`}
                 placeholder="Please list the supplements you take"
               />
@@ -64,7 +64,7 @@ export function OtherHabitsStep({ formData, handleInputChange, errors = {} }: Ot
           <Label className="text-gray-700">Do you experience brain fog?</Label>
           <RadioGroup
             value={formData.brain_fog || ''}
-            onValueChange={(value) => handleInputChange("brain_fog", value)}
+            onValueChange={(value) => handleInputChange(value, "brain_fog")}
             className="flex gap-6"
           >
           {errors.brain_fog && (
@@ -88,7 +88,7 @@ export function OtherHabitsStep({ formData, handleInputChange, errors = {} }: Ot
           <Label className="text-gray-700">Do you have any allergies?</Label>
           <RadioGroup
             value={formData.allergies || ''}
-            onValueChange={(value) => handleInputChange("allergies", value)}
+            onValueChange={(value) => handleInputChange(value, "allergies")}
             className="flex gap-6"
           >
           {errors.allergies && (
@@ -111,7 +111,7 @@ export function OtherHabitsStep({ formData, handleInputChange, errors = {} }: Ot
               <Textarea
                 id="allergies_detail"
                 value={formData.allergies_detail || ''}
-                onChange={(e) => handleInputChange("allergies_detail", e.target.value)}
+                onChange={(e) => handleInputChange(e, "allergies_detail")}
                 className={`min-h-[60px] border-gray-200 focus:border-blue-400 focus:ring-blue-400 ${errors.allergies_detail ? 'border-red-500' : ''}`}
                 placeholder="Please list your allergies"
               />

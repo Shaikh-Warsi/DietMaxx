@@ -50,18 +50,37 @@ export function HomePage() {
     alcohol: "",
     stress_level: 0
   };
-  
   const {
     formData,
     errors,
     loading,
-    handleInputChange,
     resetForm,
-    validateForm
+    validateForm,
+    handleInputChange: useFormHandleInputChange,
   } = useForm({
     initialValues,
     validate: validateFormData
   });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string,
+    name: keyof FormData
+  ) => {
+    let value: string | number;
+
+    if (typeof e === 'string') {
+      value = e; // Value comes directly from RadioGroup's onValueChange
+    } else {
+      value = e.target.value;
+    }
+
+    // For number inputs, convert the value to a number
+    if (name === 'age' || name === 'weight' || name === 'stress_level') {
+      useFormHandleInputChange(name, parseFloat(value as string) || 0);
+    } else {
+      useFormHandleInputChange(name, value);
+    }
+  };
 
   const nextStep = () => {
     if (currentStep < 6) {

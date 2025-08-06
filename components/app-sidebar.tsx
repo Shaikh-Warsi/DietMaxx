@@ -1,4 +1,4 @@
-import { Home, Pill, Brain, Heart, Moon, Settings, LogIn } from "lucide-react"
+import { Home, Pill, Brain, Heart, Moon, Settings } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -14,17 +14,17 @@ import {
 const menuItems = [
     {
       title: "Home",
-      id: "home",
+      id: "",
       icon: HomeIcon,
     },
     {
       title: "Vitamin Optimization",
-      id: "vitamin",
+      id: "vitamin-optimization",
       icon: PillIcon,
     },
     {
       title: "Neurochemical Optimization",
-      id: "neurochemical",
+      id: "neurochemical-optimization",
       icon: BrainIcon,
     },
     {
@@ -42,24 +42,16 @@ const menuItems = [
       id: "settings",
       icon: SettingsIcon,
     },
-    {
-      title: "Login",
-      id: "login",
-      icon: LogInIcon,
-    },
+
   ]
 
-import { PageType } from "../app/ClientLayout";
-import { Home as HomeIcon, Pill as PillIcon, Brain as BrainIcon, Heart as HeartIcon, Moon as MoonIcon, Settings as SettingsIcon, LogIn as LogInIcon, LogOut as LogOutIcon } from "lucide-react";
 
-export function AppSidebar({ setCurrentPage, onLogout }: { setCurrentPage: (page: PageType) => void; onLogout: () => void }) {
+import { Home as HomeIcon, Pill as PillIcon, Brain as BrainIcon, Heart as HeartIcon, Moon as MoonIcon, Settings as SettingsIcon } from "lucide-react";
+
+export function AppSidebar() {
 
 
-  const handleNavigation = (pageId: PageType) => {
-    setCurrentPage(pageId);
-    // Dispatch a custom event for navigation
-    window.dispatchEvent(new CustomEvent("navigate", { detail: pageId }));
-  }
+
 
   return (
     <Sidebar className="border-r border-gray-200">
@@ -77,7 +69,7 @@ export function AppSidebar({ setCurrentPage, onLogout }: { setCurrentPage: (page
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton
-                    onClick={() => handleNavigation(item.id as PageType)}
+                    onClick={() => window.location.href = `/${item.id}`}
                     className="flex items-center gap-3 hover:bg-blue-50 transition-colors cursor-pointer"
                   >
                     <item.icon className="h-4 w-4" />
@@ -92,15 +84,6 @@ export function AppSidebar({ setCurrentPage, onLogout }: { setCurrentPage: (page
           <SidebarGroupLabel className="text-gray-600 text-xs uppercase tracking-wide">Account</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  onClick={onLogout}
-                  className="flex items-center gap-3 hover:bg-blue-50 transition-colors cursor-pointer"
-                >
-                  <LogOutIcon className="h-4 w-4" />
-                  <span>Logout</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -44,7 +44,11 @@ export function Chatbot({ formData, onClose }: ChatbotProps) {
     // Import the API client
     const { apiClient } = await import('@/lib/api');
     
-    const result = await apiClient.sendChatMessage(input, messages, formData);
+    const formattedMessages = messages.map(msg => ({
+      role: msg.role,
+      parts: [{ text: msg.parts }]
+    }));
+    const result = await apiClient.sendChatMessage(input, formattedMessages, formData);
     
     if (result.data) {
       const modelMessage: Message = { role: 'model', parts: result.data.response };

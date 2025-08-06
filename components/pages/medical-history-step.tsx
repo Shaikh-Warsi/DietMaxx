@@ -10,7 +10,7 @@ import { FormData } from "@/types/form"
 
 interface MedicalHistoryStepProps {
   formData: FormData;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string, name: keyof FormData, type?: 'radio') => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string, name: keyof FormData) => void;
   errors: Partial<FormData>;
 }
 
@@ -57,7 +57,7 @@ export function MedicalHistoryStep({
           <RadioGroup
             name="smoking"
             value={formData.smoking || ''}
-            onValueChange={(value) => handleInputChange(value, 'smoking', 'radio')}
+            onValueChange={(value) => handleInputChange(value, 'smoking')}
             className="flex space-x-4"
           >
             <div className="flex items-center space-x-2">
@@ -77,7 +77,7 @@ export function MedicalHistoryStep({
           <RadioGroup
             name="alcohol"
             value={formData.alcohol || ''}
-            onValueChange={(value) => handleInputChange(value, 'alcohol', 'radio')}
+            onValueChange={(value) => handleInputChange(value, 'alcohol')}
             className="flex space-x-4"
           >
             <div className="flex items-center space-x-2">

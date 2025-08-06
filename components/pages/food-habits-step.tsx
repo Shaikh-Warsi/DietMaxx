@@ -7,7 +7,7 @@ import { AlertCircle } from "lucide-react"
 
 interface FoodHabitsStepProps {
   formData: FormData;
-  handleInputChange: (field: keyof FormData, value: string | number) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string, name: keyof FormData) => void;
   errors?: Record<string, string>;
 }
 
@@ -23,7 +23,7 @@ export function FoodHabitsStep({ formData, handleInputChange, errors = {} }: Foo
           <Label className="text-gray-700">Do you consume fast food?</Label>
           <RadioGroup
             value={formData.fast_food || ''}
-            onValueChange={(value) => handleInputChange("fast_food", value)}
+            onValueChange={(value) => handleInputChange(value, "fast_food")}
             className="flex gap-6"
           >
           {errors.fast_food && (
@@ -46,7 +46,7 @@ export function FoodHabitsStep({ formData, handleInputChange, errors = {} }: Foo
               <Textarea
                 id="fast_food_type"
                 value={formData.fast_food_type || ''}
-                onChange={(e) => handleInputChange("fast_food_type", e.target.value)}
+                onChange={(e) => handleInputChange(e, "fast_food_type")}
                 className={`min-h-[60px] border-gray-200 focus:border-blue-400 focus:ring-blue-400 ${errors.fast_food_type ? 'border-red-500' : ''}`}
                 placeholder="What types of fast food do you usually eat?"
               />
@@ -64,7 +64,7 @@ export function FoodHabitsStep({ formData, handleInputChange, errors = {} }: Foo
           <Label className="text-gray-700">Do you drink green tea?</Label>
           <RadioGroup
             value={formData.green_tea || ''}
-            onValueChange={(value) => handleInputChange("green_tea", value)}
+            onValueChange={(value) => handleInputChange(value, "green_tea")}
             className="flex gap-6"
           >
           {errors.green_tea && (
@@ -88,7 +88,7 @@ export function FoodHabitsStep({ formData, handleInputChange, errors = {} }: Foo
           <Label className="text-gray-700">Do you consume nuts?</Label>
           <RadioGroup
             value={formData.nuts || ''}
-            onValueChange={(value) => handleInputChange("nuts", value)}
+            onValueChange={(value) => handleInputChange(value, "nuts")}
             className="flex gap-6"
           >
           {errors.nuts && (
