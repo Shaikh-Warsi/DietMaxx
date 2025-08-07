@@ -42,7 +42,7 @@ export default function Home() {
 
       {/* Footer */}
       <div className="text-center mt-12 pt-8 border-t border-gray-200">
-        <p className="text-gray-500 text-sm">Powered by Gemini 1.5 Flash AI | Built with ❤️ by DietMaxxing Team</p>
+        <p className="text-gray-500 text-sm">Powered by AI | Created by shaikh warsi</p>
       </div>
     </div>
   )
