@@ -44,3 +44,39 @@ npm run dev
 # 4. Build for production
 npm run build
 npm start
+```
+
+---
+
+## 🌐 Deployment
+
+This project is deployed on **Vercel**.  
+
+To deploy your own copy:
+
+1. Push your code to GitHub/GitLab/Bitbucket.  
+2. Go to [Vercel](https://vercel.com/), import your repo.  
+3. Configure environment variables (if any).  
+4. Click **Deploy**.  
+
+---
+
+## 🔒 Security Notes
+
+- Always serve the site over HTTPS (Vercel enforces this by default).  
+- Consider adding security headers via `vercel.json` (e.g., CSP, HSTS).  
+- Validate all form inputs and sanitize user data.  
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## 📧 Contact
+
+For feedback or questions, reach out to:  
+**ShaikhWarsi** — axeeddis@gmail.com
+🌐 Website: [dietmaxx.vercel.app](https://dietmaxx.vercel.app)
