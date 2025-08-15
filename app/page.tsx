@@ -1,6 +1,7 @@
 "use client"
 
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import { Analytics } from "@vercel/analytics/next"
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
