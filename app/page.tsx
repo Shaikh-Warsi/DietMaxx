@@ -1,7 +1,6 @@
 "use client"
 
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { Analytics } from "@vercel/analytics/next"
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
@@ -43,7 +42,7 @@ export default function Home() {
 
       {/* Footer */}
       <div className="text-center mt-12 pt-8 border-t border-gray-200">
-        <p className="text-gray-500 text-sm">Powered by AI | Created by shaikh warsi</p>
+        <p className="text-gray-500 text-sm">Powered by Gemini 1.5 Flash AI | Built with ❤️ by shaikh warsi</p>
       </div>
     </div>
   )
